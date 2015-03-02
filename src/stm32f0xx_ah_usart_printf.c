@@ -15,6 +15,7 @@
  * @param  pStr	Storage string.
  * @param  c    Character to write.
  */
+#pragma weak PrintChar
 void PrintChar(char c)
 {
 	  //implement somewhere
