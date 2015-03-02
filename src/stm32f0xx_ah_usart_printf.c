@@ -17,10 +17,7 @@
  */
 void PrintChar(char c)
 {
-	  USART_SendData(USART1, (uint8_t) ch);
-	  /* Loop until transmit data register is empty */
-	  while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
-	  {}
+	  //implement somewhere
 }
 
 /** Maximum string size allowed (in bytes). */
