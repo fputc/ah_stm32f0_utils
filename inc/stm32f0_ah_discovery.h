@@ -52,8 +52,6 @@ void AH_Discovery_Debug_Init(int baudRate);
  * @param  pStr	Storage string.
  * @param  c    Character to write.
  */
-
-
 void PrintChar(char c);
 
 #endif /* __STM32F0_AH_DISCOVERY_H */
