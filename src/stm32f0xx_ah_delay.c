@@ -58,3 +58,16 @@ void AH_DELAY_DelayMs(uint32_t delayMs) {
 	AH_DELAY_In_Process = false;
 }
 
+void AH_DELAY_StartTick(void) {
+	AH_DELAY_Milliseconds = 0;
+	AH_DELAY_In_Process = true;
+}
+
+void AH_DELAY_StopTick(void) {
+	AH_DELAY_In_Process = false;
+}
+
+uint32_t AH_DELAY_GetTickTime(void) {
+	return AH_DELAY_Milliseconds;
+}
+

@@ -3,6 +3,60 @@
 RTC_TimeTypeDef RTC_TimeStructure;
 RTC_DateTypeDef RTC_DateStructure;
 
+const char* weekdayEnName[] = {
+	"",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday",
+	"Sunday"
+};
+
+/**
+  * @brief Initialize the RTC peripheral to use LSI oscillator with dividers
+  * calculated for 40kHz.
+  * @param  None
+  * @retval None
+  */
+void AH_RTC_Init(void)
+{
+	/*Dividers calculated for 40KHz*/
+	uint32_t AsynchPrediv = 124;
+	uint32_t SynchPrediv = 319;
+
+	/* Enable the PWR clock */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
+
+	/* Allow access to RTC */
+	PWR_BackupAccessCmd(ENABLE);
+
+	/* Enable the LSI OSC */
+	RCC_LSICmd(ENABLE);
+
+	/* Wait till LSI is ready */
+	while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET) {}
+
+	/* Select the RTC Clock Source */
+	RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+
+	/* Enable the RTC Clock */
+	RCC_RTCCLKCmd(ENABLE);
+
+	/* Wait for RTC APB registers synchronization */
+	RTC_WaitForSynchro();
+
+	RTC_InitStructure.RTC_AsynchPrediv = AsynchPrediv;
+	RTC_InitStructure.RTC_SynchPrediv = SynchPrediv;
+	RTC_InitStructure.RTC_HourFormat = RTC_HourFormat_24;
+
+	if (RTC_Init(&RTC_InitStructure) == ERROR)
+	{
+		printf("Prescaler configuration failed. \n\r");
+	}
+}
+
 /**
  * @brief Returns true if daylight savings regime (summer time) is on, based on current RTC time
  * @return bool
@@ -138,14 +192,9 @@ void RTC_GetBuildTime(RTC_TimeTypeDef * timeStr) {
 	uint8_t seconds = atoi(ssec);
 
 	timeStr->RTC_H12 = RTC_H12_AM;
-	/*
 	timeStr->RTC_Hours = hours;
 	timeStr->RTC_Minutes = minutes;
 	timeStr->RTC_Seconds = seconds;
-	*/
-	timeStr->RTC_Hours = 1;
-	timeStr->RTC_Minutes = 59;
-	timeStr->RTC_Seconds = 55;
 }
 
 /**
@@ -177,15 +226,26 @@ void RTC_GetBuildDate(RTC_DateTypeDef * dateStr) {
 	uint8_t date = atoi(sdate);
 	uint8_t month = atoi(smonth);
 	uint8_t year = atoi(syear);
-	/*
+
 	dateStr->RTC_Date = date;
 	dateStr->RTC_Month = month;
 	dateStr->RTC_Year = year;
 	dateStr->RTC_WeekDay = AH_RTC_GetWeekdayForDate(date, month, year);
-	*/
-
-	dateStr->RTC_Date = 29;
-	dateStr->RTC_Month = 3;
-	dateStr->RTC_Year = 15;
-	//dateStr->RTC_WeekDay = AH_RTC_GetWeekdayForDate(date, month, year);
 }
+
+/**
+ * @brief Sets RTC time and date to point in time when last build was executed.
+ * @param None
+ * @return bool success
+ */
+bool AH_RTC_SetBuildTime(void) {
+
+	RTC_TimeStructInit(&RTC_TimeStructure);
+	RTC_DateStructInit(&RTC_DateStructure);
+
+	RTC_GetBuildTime(&RTC_TimeStructure);
+	RTC_GetBuildDate(&RTC_DateStructure);
+
+	return RTC_SetTime(RTC_Format_BIN, &RTC_TimeStructure) && RTC_SetDate(RTC_Format_BIN, &RTC_DateStructure);
+}
+

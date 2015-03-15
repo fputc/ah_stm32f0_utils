@@ -24,15 +24,13 @@ extern GPIO_TypeDef* AH_Discovery_Led_Gpio[2];
 #define LED4_GPIO_PIN GPIO_Pin_8
 #define LED4_GPIO_PERIPH_CLK RCC_AHBPeriph_GPIOC
 
-typedef enum
-{
+typedef enum {
 	AH_Discovery_Led3,
 	AH_Discovery_Led4,
 }AH_Discovery_Led_TypeDef;
 
 
-typedef enum
-{
+typedef enum {
 	AH_Led_Action_On,
 	AH_Led_Action_Off,
 	AH_Led_Action_Toggle,

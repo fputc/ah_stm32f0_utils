@@ -1,15 +1,21 @@
 #ifndef INC_STM32F0_AH_RTC_H
 #define INC_STM32F0_AH_RTC_H
 
-#include <stdbool.h>
-#include <stdio.h>
+#include "main.h"
 #include <time.h>
-#include "stm32f0xx_rtc.h"
-#include "datetime_build_defs.h"
-
 
 extern RTC_TimeTypeDef RTC_TimeStructure;
 extern RTC_DateTypeDef RTC_DateStructure;
+
+extern const char* weekdayEnName[];
+
+/**
+  * @brief Initialize the RTC peripheral to use LSI oscillator with dividers
+  * calculated for 40kHz.
+  * @param  None
+  * @retval None
+  */
+void AH_RTC_Init(void);
 
 /**
  * @brief Returns true if daylight savings regime (summer time) is on, based on current RTC time
@@ -64,4 +70,11 @@ void RTC_GetBuildTime(RTC_TimeTypeDef * timeStr);
  */
 void RTC_GetBuildDate(RTC_DateTypeDef * dateStr);
 
-#endif /* __STM32F0_AH_RTC_H */
+/**
+ * @brief Sets RTC time and date to point in time when last build was executed.
+ * @param None
+ * @return bool success
+ */
+bool AH_RTC_SetBuildTime(void);
+
+#endif /* INC_STM32F0_AH_RTC_H */
