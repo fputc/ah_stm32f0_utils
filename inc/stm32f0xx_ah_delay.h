@@ -45,4 +45,23 @@ void AH_DELAY_SysTickInit(void);
  */
 void AH_DELAY_DelayMs(uint32_t delayMs);
 
+/**
+ * @brief Start time tick that is stored as global variable.
+ * @param None
+ * @return None
+ */
+void AH_DELAY_StartTick(void);
+
+/**
+ * @brief Stop time tick that is stored as global variable.
+ * @param None
+ * @return None
+ */
+uint32_t AH_DELAY_StopTick(void);
+
+/**
+ * @brief Returns current measured time, in milliseconds
+ */
+uint32_t AH_DELAY_GetTickTime(void);
+
 #endif /* __STM32F0XX_AH_DELAY_H */
