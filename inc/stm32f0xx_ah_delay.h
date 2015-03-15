@@ -4,7 +4,7 @@
  * @author  Alen Helac
  * @version V1.0.0
  * @date    24-February-2015
- * @brief   Simple delay functionality (busy waiting, using SysTick) header file.
+ * @brief   Simple delay and time count functionality header file.
  * 			Depends on RCC component(stm32f0xx_rcc.h)
  ******************************************************************************
  */
