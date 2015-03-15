@@ -52,4 +52,6 @@ void AH_Discovery_Debug_Init(int baudRate);
  */
 void PrintChar(char c);
 
+void PrintChar(char c);
+
 #endif /* __STM32F0_AH_DISCOVERY_H */

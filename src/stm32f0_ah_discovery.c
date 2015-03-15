@@ -1,4 +1,5 @@
 #include "stm32f0_ah_discovery.h"
+#include "stm32f0xx_usart.h"
 
 const uint16_t AH_Discovery_Led_Pin[2] = {
 	LED3_GPIO_PIN,
