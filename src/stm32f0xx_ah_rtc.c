@@ -1,3 +1,13 @@
+/**
+ ******************************************************************************
+ * @file    stm32f0xx_ah_rtc.c
+ * @author  Alen Helac
+ * @version V1.0.0
+ * @brief   Collection of neat functions that can come handy when working with
+ * RTC clock.
+ ******************************************************************************
+ */
+
 #include "stm32f0xx_ah_rtc.h"
 
 RTC_TimeTypeDef RTC_TimeStructure;

@@ -1,3 +1,12 @@
+/**
+ ******************************************************************************
+ * @file    stm32f0_ah_discovery.h
+ * @author  Alen Helac
+ * @version V1.0.0
+ * @brief   Some functionality related to STM32F0-DISCOVERY board that can be
+ * easily reused elsewhere.
+ ******************************************************************************
+ */
 
 #ifndef INC_STM32F0_AH_DISCOVERY_H
 #define INC_STM32F0_AH_DISCOVERY_H

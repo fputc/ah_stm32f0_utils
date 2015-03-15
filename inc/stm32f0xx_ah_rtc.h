@@ -1,3 +1,13 @@
+/**
+ ******************************************************************************
+ * @file    stm32f0xx_ah_rtc.h
+ * @author  Alen Helac
+ * @version V1.0.0
+ * @brief   Collection of neat functions that can come handy when working with
+ * RTC clock.
+ ******************************************************************************
+ */
+
 #ifndef INC_STM32F0_AH_RTC_H
 #define INC_STM32F0_AH_RTC_H
 
